@@ -1,2 +1,19 @@
-<h1>Bookmarks#index</h1>
-<p>Find me in app/views/bookmarks/index.html.erb</p>
+<h1>All Bookmarks</h1>
+<% @bookmarks.each do |bookmark| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to bookmark.title, bookmark %>
+      </h4>
+      </br>
+      <div class="row">
+        <div class="col-xs-6 col-md-3">
+          <%= link_to bookmark.url, bookmark.url %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
