@@ -79,5 +79,5 @@ Blocmarks::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # http://collier-blocmarks.herokuapp.com, default url option for production
-  config.action_mailer.default_url_options = { host: 'collier-blocmarks.herokuapp.com'
+  config.action_mailer.default_url_options = { host: 'collier-blocmarks.herokuapp.com' }
 end
