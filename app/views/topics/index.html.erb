@@ -1,0 +1,11 @@
+<h1>All Blocmarks</h1>
+<% @topics.each do |topic| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="underline meadia-heading">
+        <%= link_to topic.title, topic %>
+      </h4>
+    </div>
+  </div>
+<% end %>
+
