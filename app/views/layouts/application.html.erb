@@ -7,13 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+    <ul class ="nav nav-pills nav-stacked">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "About", about_path %></li>
+    </ul>
 
-  <ul>
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "About", about_path %></li>
-  </ul>
-
-<%= yield %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>
