@@ -5,12 +5,12 @@
 Made with my mentor at [Bloc](http://bloc.io).
 
 == Ruby on Rails
-ruby 2.0.0p451
-rails 4.0.1
+* ruby 2.0.0p451
+* rails 4.0.1
 
 == Database
-development - sqlite3
-production - pg
+* development - sqlite3
+* production - pg
 
 == configuration
 By default Rails 4 will not serve assets. To enable this functionality we went into config/application.rb and added this line:
