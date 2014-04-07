@@ -22,3 +22,4 @@ module Blocmarks
     config.serve_static_assets = true
   end
 end
+

@@ -8,8 +8,6 @@ class IncomingController < ApplicationController
     # to get a sense of what you're dealing with.
     puts "INCOMING PARAMS HERE: #{params}"
 
-    @incoming = Incoming.new(params.require(:incoming).permit(:subject, :body_plain, :from)
-
     # You put the message-splitting and business
     # magic here. 
 

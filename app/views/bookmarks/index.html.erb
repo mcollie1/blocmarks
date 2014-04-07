@@ -1,4 +1,4 @@
-<h1>All Bookmarks</h1>
+<h1>All Blocmarks</h1>
 <% @bookmarks.each do |bookmark| %>
   <div class="media">
     <div class="media-body">
@@ -7,8 +7,14 @@
       </h4>
       </br>
       <div class="row">
-        <div class="col-xs-6 col-md-3">
-          <%= link_to bookmark.url, bookmark.url %>
+        <div class="col-md-8">
+          <% object = LinkThumbnailer.generate("http://google.com", redirect_limit: 25) %>
+          <%= object.title %>
+          <% if object.url? %>
+            <%= link_to(image_tag(object.images.first.source_url, size: "2X4"), object.url ) %>
+          <% else %>
+            <%= link_to(image_tag("icon.png", size: "2X4"), object.url ) %>
+          <% end %>
         </div>
       </div>
     </div>

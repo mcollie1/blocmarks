@@ -1,0 +1,8 @@
+<div>
+  <div>
+   <%= link_to " ", bookmark_like_vote_path(bookmark), class: 'glyphicon glyphicon-thumbs-up' %>   
+   <%= bookmark.like_votes %>
+   <%= link_to " ", bookmark_unlike_vote_path(bookmark), class: 'glyphicon glyphicon-thumbs-down' %>
+   <<%= bookmark.unlike_votes %>
+  </div>
+</div>

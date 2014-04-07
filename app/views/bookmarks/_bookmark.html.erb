@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-8">
+    <% object = LinkThumbnailer.generate("#{@bookmark.url}", redirect_limit: 25) %>
+    <%= object.title %>
+    <% if object.url? %>
+      <%= link_to(image_tag(object.images.first.source_url, size: "2X4"), object.url ) %>
+    <% else %>
+      <%= link_to(image_tag("icon.png", size: "2X4"), object.url ) %>
+    <% end %>
+  </h4>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <%= render partial: 'votes/voter', locals: { bookmark: bookmark } %>
+  </div>
+</div>
