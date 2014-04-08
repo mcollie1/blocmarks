@@ -10,14 +10,16 @@
 
 <% @user.votes.where(value: 1).each do |vote| %>
   <div class="row">
-    <% @show_bookmark = vote.bookmark %>
+    <% @show_bookmark = vote.bookmark.url %>
+  </div>
+<% end %>
 
-    <% object = LinkThumbnailer.generate(@show_bookmark.url, redirect_limit: 25) %>
+  <div>
+    <% object = LinkThumbnailer.generate(@show_bookmark, redirect_limit: 25) %>
     <%= object.title %>
-    <% if @show_bookmark.url? %>
+    <% if object.url? %>
       <%= link_to(image_tag(object.images.first.source_url, size: "2X4"), object.url ) %>
     <% else %>
       <%= link_to(image_tag("icon.png", size: "2X4"), object.url ) %>
     <% end %>
   </div>
-<% end %>

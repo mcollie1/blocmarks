@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20140406012615) do
 
   create_table "incomings", force: true do |t|
     t.string   "subject"
-    t.text     "body_plain"
+    t.string   "body-plain"
     t.string   "from"
     t.datetime "created_at"
     t.datetime "updated_at"

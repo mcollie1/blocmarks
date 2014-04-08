@@ -5,7 +5,6 @@ Blocmarks::Application.routes.draw do
   resources :users, only: [:show, :update]
 
   post :incoming, to: 'incoming#create'
-  get :incoming, to: 'incoming#index'
 
   resources :bookmarks do
     get '/like-vote' => 'votes#like_vote', as: :like_vote
