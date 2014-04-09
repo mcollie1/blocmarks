@@ -56,4 +56,6 @@ gem 'devise'
 gem 'link_thumbnailer'
 gem 'figaro'
 gem 'griddler'
+gem 'incoming'
+gem 'pundit'
 

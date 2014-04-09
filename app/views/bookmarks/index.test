@@ -1,0 +1,74 @@
+<h1>All Blocmarks</h1>
+<% @bookmarks.each do |bookmark| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to bookmark.title, bookmark %>
+      </h4>
+      </br>
+      <div class="row">
+        <div class="col-md-8">
+          <% object = LinkThumbnailer.generate('http://www.yahoo.com') %>
+          <%= object.title %>
+          <% if object.images? %>
+            <%= link_to(image_tag(object.image), object.url ) %>
+          <% else %>
+            <%= link_to(image_tag("icon.png"), object.url ) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <%= render partial: 'votes/voter', locals: { bookmark: bookmark } %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+<h1>All Blocmarks</h1>
+<% @bookmarks.each do |bookmark| %>
+  <div class="media">
+    <div class="media-body">
+      <div class="media-heading">
+        <% blocmark_titles = @bookmarks.map { |b| b["title"] } %>
+        <% unique_titles = blocmark_titles.uniq %>
+        <% unique_titles.each do | unique| %>
+        <h4>
+          <%= link_to unique, bookmark %>
+        </h4>
+            <% @bookmarks.each do |blocmark| %>
+              <% if blocmark.title == unique %>
+                <div class="row">
+                  <div class="col-md-8">
+                    <% object = LinkThumbnailer.generate(blocmark.url) %>
+                    <%= object.title %>
+                    <% if object.images? %>
+                      <%= link_to(image_tag(object.image), object.url ) %>
+                    <% else %>
+                      <%= link_to(image_tag("icon.png"), object.url ) %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <%= render partial: 'votes/voter', locals: { bookmark: bookmark } %>
+                  </div>
+                </div>
+              <% else %>
+                <% nil %>
+              <% end %>
+            <% end %>
+          
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

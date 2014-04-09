@@ -9,19 +9,21 @@ class IncomingController < ApplicationController
   def create
     puts "INCOMING PARAMS HERE: #{params}"
 
-    #@sender = Incoming.new(params["from"])
-    #@sender.save
-    #@body = Incoming.new(params["body-plain"])
-    #@body.save
+    sender = params['sender']
+    subject = params['subject']
+    body_plain = params["body-plain"]
+    @user = User.find_by_email(sender)
+
+    #if @user.exists?
+    @user.bookmarks.create!({ title: subject, url: body_plain })
+    #else
+      #nil
+    #end
 
     # You put the message-splitting and business
     # magic here. 
 
     # Assuming all went well. 
-
-    #@subject = JSON.parse(params["subject"])
-    #@sender = JSON.parse(params["from"])
-    #@body = JSON.parse(params["body_plain"])
     # head 200
   end
 end

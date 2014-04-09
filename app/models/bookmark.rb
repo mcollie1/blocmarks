@@ -1,4 +1,5 @@
 class Bookmark < ActiveRecord::Base
+
   belongs_to :user
   has_many :votes
 
@@ -13,4 +14,6 @@ class Bookmark < ActiveRecord::Base
   def points
     self.votes.where(:value).count
   end
+
+  validates :url, format: {with: Regexp.new(URI::regexp(%w(http https)))}, presence: true
 end
