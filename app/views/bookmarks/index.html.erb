@@ -2,25 +2,38 @@
 <div class="media">
   <div class="media-body">
     <div class="media-heading">
-      <% @bookmarks.each do |bookmark| %>
-        <%= bookmark.title %>
-        <div class="row">
-          <div class="col-md-20 col-md-2">           
-            <% object = LinkThumbnailer.generate(bookmark.url) %>
-            
-            <% if object.images? %>
-              <%= link_to(image_tag(object.image, size: "100x100"), object.url ) %>
+      <% blocmark_titles = @bookmarks.map { |b| b["title"] } %>
+      <% unique_titles = blocmark_titles.uniq %>
+      <% unique_titles.each do | unique| %>
+      <h4>
+        <%= unique %>
+      </h4>
+          <% @bookmarks.each do |bookmark| %>
+            <% if bookmark.title == unique %>
+              <div class="row">
+                <div class="col-md-20, col-md-2">
+                  <% bookmark.urls.each do |url| %>
+                    <% object = LinkThumbnailer.generate(url.url) %>
+                    <%= object.title %>
+                    <p></P>
+                    <% if object.images? %>
+                      <%= link_to(image_tag(object.image, size: "100x100"), object.url ) %>
+                    <% else %>
+                      <%= link_to(image_tag("icon.png", size: "100x100"), object.url ) %>
+                    <% end %>      
+                    
+                    <%= render partial: 'votes/voter', locals: { bookmark: bookmark, url: url } %>
+                  <% end %>
+                </div>
+              </div>
             <% else %>
-              <%= link_to(image_tag("icon.png", size: "100x100"), object.url ) %>
+              <% nil %>
             <% end %>
-            <%= object.title %>      
-            </br>
-            
-          </div>
-        </div>        
-      <% end %> 
+          <% end %>     
+      <% end %>
     </div>
   </div>
+</div>>
 </div>
 
 

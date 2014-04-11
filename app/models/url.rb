@@ -3,7 +3,7 @@ class Url < ActiveRecord::Base
   belongs_to :user
   has_many :votes, dependent: :destroy
 
-  after_create :create_vote
+  # after_create :create_vote
 
   private
 

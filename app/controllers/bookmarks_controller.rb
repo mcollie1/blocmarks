@@ -18,8 +18,8 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:bookmark_id])
-    @url = @bookmark.urls.find(params[:id])
+    @bookmark = Bookmark.find(params[:id])
+    @urls = @bookmark.urls
     url_name = @url.url
 
     authorize @bookmark
