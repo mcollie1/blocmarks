@@ -12,14 +12,27 @@ class IncomingController < ApplicationController
     sender = params['sender']
     subject = params['subject']
     body_plain = params["body-plain"]
-    @user = User.find_by_email(sender)
+    user = User.find_by_email(sender)
+    id = user.id
+    email = user.email
 
-    #if @user.exists?
-    @user.bookmarks.create!({ title: subject, url: body_plain })
-    #else
-      #nil
-    #end
+    if user.bookmarks.count > 0 # if user has bookmarks?
+      user_bookmarks = user.bookmarks
+      titles = user.bookmarks.map { |b| b["title"] }
 
+      if titles.include?(subject)
+        user_bookmark = user_bookmarks.find_by_title(subject)
+        user_bookmark.urls.create!(url: body_plain, user_id: id)
+      else
+        new_user_entry = user.bookmarks.create!({ title: subject, url: body_plain })
+        new_user_entry.urls.create!(url: body_plain, user_id: id) 
+      end 
+    else #if bookmarks don't exist yet
+      new_entry = user.bookmarks.create!({ title: subject, url: body_plain })
+      new_entry.urls.create!(url: body_plain, user_id: id)
+    end
+    
+ 
     # You put the message-splitting and business
     # magic here. 
 

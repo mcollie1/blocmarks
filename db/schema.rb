@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408233228) do
+ActiveRecord::Schema.define(version: 20140410044554) do
 
   create_table "bookmarks", force: true do |t|
     t.string   "title"
@@ -30,6 +30,26 @@ ActiveRecord::Schema.define(version: 20140408233228) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "like_likes", force: true do |t|
+    t.string  "liker_type",    null: false
+    t.integer "liker_id",      null: false
+    t.string  "likeable_type", null: false
+    t.integer "likeable_id",   null: false
+  end
+
+  add_index "like_likes", ["liker_type", "liker_id", "likeable_type", "likeable_id"], name: "unique_like_likes", unique: true
+
+  create_table "urls", force: true do |t|
+    t.string   "url"
+    t.integer  "bookmark_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "urls", ["bookmark_id"], name: "index_urls_on_bookmark_id"
+  add_index "urls", ["user_id"], name: "index_urls_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -61,6 +81,7 @@ ActiveRecord::Schema.define(version: 20140408233228) do
     t.integer  "bookmark_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "url_id"
   end
 
   add_index "votes", ["bookmark_id"], name: "index_votes_on_bookmark_id"

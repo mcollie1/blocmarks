@@ -2,24 +2,18 @@
   <h1>Welcome to Blocmarks</h1>
 </div>
 
-<div class="row" >
-  <div class="col-md-6">
-    <h3>A free service that allows you to store and retrieve bookmarked sites from anywhere, at anytime! </h3>
+<div class="row text-centered" >
+  <div class="media">
+    <div class="media-body">
+      <div class="media-heading">
+        <h3>Save and organize your bookmarks today! </h3>
+      </div>
+    </div>
   </div>
+</div>
 
-  </br>
-  <div class="column" "pull-right">
-    <div class="col-md-4">
-      <h4>What You Need to Do</h4>
-    </div>
-    <div class="col-md-4">
-      <p> Step 1: Sign up today</p>
-    </div>
-    <div class="col-md-4">
-      <p> Step 2: Email us the bookmark link</p>
-    </div>
-    <div class="col-md-4">
-      <p> Step 3: Sign-in to view your own indexed bookmarks</p>
-    </div>
-  </div>  
+</br>
+<div class="text-centered" >
+  <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %> or 
+  <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
 </div>

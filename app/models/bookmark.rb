@@ -1,7 +1,7 @@
 class Bookmark < ActiveRecord::Base
-
   belongs_to :user
-  has_many :votes
+  has_many :votes, dependent: :destroy
+  has_many :urls, dependent: :destroy
 
   def like_votes
     self.votes.where(value: 1).count

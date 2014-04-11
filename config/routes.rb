@@ -6,13 +6,10 @@ Blocmarks::Application.routes.draw do
 
   post :incoming, to: 'incoming#create'
 
-  post '/emails' => 'emails#create'
-
   resources :bookmarks do
-    get '/like-vote' => 'votes#like_vote', as: :like_vote
-    get '/unlike-vote' => 'votes#unlike_vote', as: :unlike_vote
-    member do
-      get 'like'
+    resources :urls, only: [:create, :show, :destroy] do
+      get '/like-vote' => 'votes#like_vote', as: :like_vote
+      get '/unlike-vote' => 'votes#unlike_vote', as: :unlike_vote
     end
   end
 

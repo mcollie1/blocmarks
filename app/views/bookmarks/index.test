@@ -19,7 +19,7 @@
       </div>
       <div class="row">
         <div class="col-md-8">
-          <%= render partial: 'votes/voter', locals: { bookmark: bookmark } %>
+          <%= render partial: 'votes/voter', locals: { bookmark: @bookmark, url: @url } %>
         </div>
       </div>
     </div>
@@ -34,41 +34,44 @@
 
 
 <h1>All Blocmarks</h1>
-<% @bookmarks.each do |bookmark| %>
-  <div class="media">
-    <div class="media-body">
-      <div class="media-heading">
-        <% blocmark_titles = @bookmarks.map { |b| b["title"] } %>
-        <% unique_titles = blocmark_titles.uniq %>
-        <% unique_titles.each do | unique| %>
-        <h4>
-          <%= link_to unique, bookmark %>
-        </h4>
-            <% @bookmarks.each do |blocmark| %>
-              <% if blocmark.title == unique %>
-                <div class="row">
-                  <div class="col-md-8">
-                    <% object = LinkThumbnailer.generate(blocmark.url) %>
+<div class="media">
+  <div class="media-body">
+    <div class="media-heading">
+      <% blocmark_titles = @bookmarks.map { |b| b["title"] } %>
+      <% unique_titles = blocmark_titles.uniq %>
+      <% unique_titles.each do | unique| %>
+      <h4>
+        <%= unique %>
+      </h4>
+          <% @bookmarks.each do |bookmark| %>
+            <% if bookmark.title == unique %>
+              <div class="row">
+                <div class="col-md-20, col-md-2">
+                  <% bookmark.urls.each do |url| %>
+                    <% object = LinkThumbnailer.generate(url.url) %>
                     <%= object.title %>
+                    <p></P>
                     <% if object.images? %>
-                      <%= link_to(image_tag(object.image), object.url ) %>
+                      <%= link_to(image_tag(object.image, size: "100x100"), object.url ) %>
                     <% else %>
-                      <%= link_to(image_tag("icon.png"), object.url ) %>
-                    <% end %>
-                  </div>
+                      <%= link_to(image_tag("icon.png", size: "100x100"), object.url ) %>
+                    <% end %>      
+                    
+                    <%= render partial: 'votes/voter', locals: { bookmark: bookmark } %> 
+                    
+                  <% end %>
+             
+                  <% if policy(bookmark).destroy? %>
+                    <%= link_to "Delete Blocmark", bookmark, method: :delete, class: 'btn btn-danger', confirm: 'Are you sure you want to delete this blocmark?' %> 
+                  <% end %>
                 </div>
-                <div class="row">
-                  <div class="col-md-8">
-                    <%= render partial: 'votes/voter', locals: { bookmark: bookmark } %>
-                  </div>
-                </div>
-              <% else %>
-                <% nil %>
-              <% end %>
+              </div>
+            <% else %>
+              <% nil %>
             <% end %>
-          
-        <% end %>
-      </div>
+          <% end %>
+        
+      <% end %>
     </div>
   </div>
-<% end %>
+</div>

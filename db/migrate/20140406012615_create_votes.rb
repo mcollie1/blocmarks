@@ -4,7 +4,7 @@ class CreateVotes < ActiveRecord::Migration
       t.integer :value
       t.references :user, index: true
       t.references :bookmark, index: true
-
+   
       t.timestamps
     end
   end

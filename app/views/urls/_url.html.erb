@@ -1,0 +1,5 @@
+<div class="media" id="url-<%= url.id %>" > 
+  <% if policy(url).destroy? %>
+    <%= link_to "Delete", url_helper(url), method: :delete, class: 'btn btn-danger', confirm: 'Are you sure you want to delete this blocmark?' %>
+  <% end %>
+</div>

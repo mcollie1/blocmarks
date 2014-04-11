@@ -2,42 +2,27 @@
 <div class="media">
   <div class="media-body">
     <div class="media-heading">
-      <% blocmark_titles = @bookmarks.map { |b| b["title"] } %>
-      <% unique_titles = blocmark_titles.uniq %>
-      <% unique_titles.each do | unique| %>
-      <h4>
-        <%= unique %>
-      </h4>
-          <% @bookmarks.each do |bookmark| %>
-            <% if bookmark.title == unique %>
-              <div class="row">
-                <div class="col-md-8">
-                  <% object = LinkThumbnailer.generate(bookmark.url) %>
-                  <%= object.title %>
-                  <% if object.images? %>
-                    <%= link_to(image_tag(object.image), object.url ) %>
-                  <% else %>
-                    <%= link_to(image_tag("icon.png"), object.url ) %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
-                  <%= render partial: 'votes/voter', locals: { bookmark: bookmark } %>
-                </div>
-              </div>
-              <% if policy(bookmark).destroy? %>
-                <%= link_to "Delete Blocmark", bookmark, method: :delete, class: 'btn btn-danger', confirm: 'Are you sure you want to delete this blocmark?' %> 
-              <% end %>
+      <% @bookmarks.each do |bookmark| %>
+        <%= bookmark.title %>
+        <div class="row">
+          <div class="col-md-20 col-md-2">           
+            <% object = LinkThumbnailer.generate(bookmark.url) %>
+            
+            <% if object.images? %>
+              <%= link_to(image_tag(object.image, size: "100x100"), object.url ) %>
             <% else %>
-              <% nil %>
+              <%= link_to(image_tag("icon.png", size: "100x100"), object.url ) %>
             <% end %>
-          <% end %>
-        
-      <% end %>
+            <%= object.title %>      
+            </br>
+            
+          </div>
+        </div>        
+      <% end %> 
     </div>
   </div>
 </div>
+
 
 
 

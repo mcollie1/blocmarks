@@ -5,7 +5,7 @@ class BookmarkPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && user.role?(:admin)
+    user.present? && user.role?(:admin) 
   end
 
   def destroy?
