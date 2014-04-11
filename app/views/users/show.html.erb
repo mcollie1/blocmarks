@@ -24,7 +24,7 @@
         <% end %>
         <%= object.title %>
         <div>
-          <%= render partial: 'urls/url', collection: @urls %>
+          <%= render partial: 'urls/url', locals: {url: url} %>
         </div>
       <% end %>
     </div>
