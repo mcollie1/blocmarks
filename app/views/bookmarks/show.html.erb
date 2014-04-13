@@ -1,5 +1,23 @@
 <h1><%= @bookmark.title %></h1>
 <p>
- <%= render @bookmark %>
+  <div class="row text-centered">
+    <% @bookmark.urls.each do |url| %>
+      <div class="col-md-2">    
+        <% object = LinkThumbnailer.generate(url.url, redirect_limit: 25) %>
+             
+        <% if object.url? %>
+          <%= link_to(image_tag(object.image, size: "100x100"), object.url ) %>
+        <% else %>
+          <%= link_to(image_tag("icon.png", size: "100x60"), object.url ) %>
+        <% end %>
+        <div>
+          <%= object.title %>
+        </div>
+        <div>
+          <%= render partial: 'urls/url', locals: {url: url} %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </p>
   

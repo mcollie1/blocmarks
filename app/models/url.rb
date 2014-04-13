@@ -5,6 +5,18 @@ class Url < ActiveRecord::Base
 
   # after_create :create_vote
 
+  def like_votes
+    self.votes.where(value: 1).count
+  end
+
+  def unlike_votes
+    self.votes.where(value: -1).count
+  end
+
+  def points
+    self.votes.sum(:value).to_i
+  end
+
   private
 
   def create_vote

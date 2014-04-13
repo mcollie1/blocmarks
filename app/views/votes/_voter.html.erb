@@ -3,9 +3,10 @@
     <div>
       <%= link_to " ", 
         bookmark_url_like_vote_path(bookmark, url), class: "glyphicon glyphicon-thumbs-up" %>
-    
+      <%= url.like_votes %>
       <%= link_to " ", 
         bookmark_url_unlike_vote_path(bookmark, url), class: "glyphicon glyphicon-thumbs-down" %>
+      <%= url.unlike_votes %>
     </div>
   </div>
 <% end %>

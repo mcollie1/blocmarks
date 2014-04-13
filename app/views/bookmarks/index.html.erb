@@ -11,20 +11,21 @@
           <% @bookmarks.each do |bookmark| %>
             <% if bookmark.title == unique %>
               <div class="row">
-                <div class="col-md-20, col-md-2">
-                  <% bookmark.urls.each do |url| %>
+                <% bookmark.urls.each do |url| %>
+                  <div class="col-md-2">
                     <% object = LinkThumbnailer.generate(url.url) %>
-                    <%= object.title %>
-                    <p></P>
                     <% if object.images? %>
                       <%= link_to(image_tag(object.image, size: "100x100"), object.url ) %>
                     <% else %>
                       <%= link_to(image_tag("icon.png", size: "100x100"), object.url ) %>
-                    <% end %>      
+                    <% end %>
+                    <div>
+                      <%= object.title %>
+                    </div>      
                     
                     <%= render partial: 'votes/voter', locals: { bookmark: bookmark, url: url } %>
-                  <% end %>
-                </div>
+                  </div>
+                <% end %>
               </div>
             <% else %>
               <% nil %>
@@ -33,8 +34,8 @@
       <% end %>
     </div>
   </div>
-</div>>
 </div>
+
 
 
 
