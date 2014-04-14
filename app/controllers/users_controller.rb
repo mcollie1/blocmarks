@@ -3,8 +3,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @vote = @user.votes.find(params[:id])
+    @vote = Vote.find(params[:id])
     @url = @vote.url
+    @bookmark = @url.bookmark
   end
 
   def create

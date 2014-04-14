@@ -21,7 +21,10 @@
                     <% end %>
                     <div>
                       <%= object.title %>
-                    </div>      
+                    </div>
+                    <small>
+                      submitted <%= time_ago_in_words(url.created_at) %> ago by <%= url.user.name %><br/>
+                    </small>     
                     
                     <%= render partial: 'votes/voter', locals: { bookmark: bookmark, url: url } %>
                   </div>

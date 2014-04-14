@@ -8,7 +8,7 @@ class BookmarksController < ApplicationController
 
   def show
     @bookmark = Bookmark.find(params[:id])
-    @urls = @bookmark.urls
+    @urls= @bookmark.urls
   end
 
   def new
