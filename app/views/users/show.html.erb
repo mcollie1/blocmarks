@@ -50,9 +50,9 @@
      
       <div>
         <%= link_to " ", 
-          bookmark_url_like_vote_path(like, @url), class: "glyphicon glyphicon-thumbs-up" %>
+          bookmark_url_like_vote_path(like.url.bookmark, like.url), class: "glyphicon glyphicon-thumbs-up" %>
         <%= link_to " ", 
-          bookmark_url_unlike_vote_path(@bookmark, @url), class: "glyphicon glyphicon-thumbs-down" %>
+          bookmark_url_unlike_vote_path(like.url.bookmark, like.url), class: "glyphicon glyphicon-thumbs-down" %>
       </div>
     </div>
   <% end %>
