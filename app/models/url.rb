@@ -5,6 +5,8 @@ class Url < ActiveRecord::Base
 
   # after_create :create_vote
 
+  validates :url, format: {with: Regexp.new(URI::regexp(%w(http https)))}, presence: true
+
   def like_votes
     self.votes.where(value: 1).count
   end

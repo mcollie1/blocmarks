@@ -19,10 +19,13 @@ class IncomingController < ApplicationController
     if user.bookmarks.count > 0 # if user has bookmarks?
       user_bookmarks = user.bookmarks
       titles = user.bookmarks.map { |b| b["title"] }
+      urls = user.urls.map { |u| u["url"] }
 
-      if titles.include?(subject)
+      if titles.include?(subject) && urls.exclude?(body_plain)
         user_bookmark = user_bookmarks.find_by_title(subject)
         user_bookmark.urls.create!(url: body_plain, user_id: id)
+      elsif titles.include?(subject) && urls.include?(body_plain)
+        nil
       else
         new_user_entry = user.bookmarks.create!({ title: subject, url: body_plain })
         new_user_entry.urls.create!(url: body_plain, user_id: id) 
