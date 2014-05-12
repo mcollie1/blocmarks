@@ -8,13 +8,12 @@ class IncomingController < ApplicationController
     subject = params['subject']
     body_plain = params["body-plain"]
     user = User.find_by_email(sender)
-    id = user.id
 
-    entry = Bookmark.find_or_create_by!(user_id: id, title: subject)
+    entry = Bookmark.find_or_create_by!(user_id: user.id, title: subject)
     urls = entry.urls.map { |u| u["url"] }
 
     if urls.exclude?(body_plain)
-      entry.urls.create!(url: body_plain) 
+      entry.urls.create!(url: body_plain, user_id: user.id) 
     end
   end
 end
