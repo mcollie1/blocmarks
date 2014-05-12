@@ -9,12 +9,7 @@ class BookmarksController < ApplicationController
   def show
     @bookmark = Bookmark.find(params[:id])
     @urls= @bookmark.urls
-  end
-
-  def new
-  end
-
-  def edit
+    authorize @bookmark
   end
 
   def destroy

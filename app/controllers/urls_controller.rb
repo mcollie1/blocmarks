@@ -2,6 +2,7 @@ class UrlsController < ApplicationController
   def show
     @bookmark = Bookmark.find(params[:bookmark_id])
     @url = Url.find(params[:id])
+    authorize @url
   end
 
   def destroy

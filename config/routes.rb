@@ -6,8 +6,8 @@ Blocmarks::Application.routes.draw do
 
   post :incoming, to: 'incoming#create'
 
-  resources :bookmarks do
-    resources :urls, only: [:create, :show, :destroy] do
+  resources :bookmarks, only: [:index, :show, :destroy] do
+    resources :urls, only: [:show, :destroy] do
       get '/like-vote' => 'votes#like_vote', as: :like_vote
       get '/unlike-vote' => 'votes#unlike_vote', as: :unlike_vote
     end
