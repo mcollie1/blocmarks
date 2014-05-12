@@ -14,16 +14,7 @@ class IncomingController < ApplicationController
     urls = entry.urls.map { |u| u["url"] }
 
     if urls.exclude?(body_plain)
-      user_bookmark = user_bookmarks.find_by_title(subject)
-      user_bookmark.urls.create!(url: body_plain, user_id: id)
-    elsif !urls.include?(body_plain)
       entry.urls.create!(url: body_plain) 
     end
-    
-    # You put the message-splitting and business
-    # magic here. 
-
-    # Assuming all went well. 
-    # head 200
   end
 end
