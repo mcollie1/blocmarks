@@ -11,26 +11,20 @@ class IncomingController < ApplicationController
     id = user.id
     email = user.email
 
-    if user.bookmarks.count > 0 # if user has bookmarks?
-      user_bookmarks = user.bookmarks
-      titles = user.bookmarks.map { |b| b["title"] }
-      urls = user.urls.map { |u| u["url"] }
+    entry = Bookmark.create_with({title: subject, url: body_plain}).find_or_create_by(user_id: id)
+    user_bookmarks = user.bookmarks
+    titles = user.bookmarks.map { |b| b["title"] }
+    urls = user.urls.map { |u| u["url"] }
 
-      if titles.include?(subject) && urls.exclude?(body_plain)
-        user_bookmark = user_bookmarks.find_by_title(subject)
-        user_bookmark.urls.create!(url: body_plain, user_id: id)
-      elsif titles.include?(subject) && urls.include?(body_plain)
-        nil
-      else
-        new_user_entry = user.bookmarks.create!({ title: subject, url: body_plain })
-        new_user_entry.urls.create!(url: body_plain, user_id: id) 
-      end 
-    else #if bookmarks don't exist yet
-      new_entry = user.bookmarks.create!({ title: subject, url: body_plain })
-      new_entry.urls.create!(url: body_plain, user_id: id)
+    if titles.include?(subject) && urls.exclude?(body_plain)
+      user_bookmark = user_bookmarks.find_by_title(subject)
+      user_bookmark.urls.create!(url: body_plain, user_id: id)
+    elsif titles.include?(subject) && urls.include?(body_plain)
+      nil
+    else
+      entry.urls.create!(url: body_plain) 
     end
     
- 
     # You put the message-splitting and business
     # magic here. 
 
