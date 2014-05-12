@@ -11,7 +11,7 @@ class IncomingController < ApplicationController
     id = user.id
     email = user.email
 
-    entry = Bookmark.create_with({title: subject, url: body_plain}).find_or_create_by(user_id: id)
+    entry = Bookmark.create_with(title: subject, url: body_plain).find_or_create_by(user_id: id)
     user_bookmarks = user.bookmarks
     titles = user.bookmarks.map { |b| b["title"] }
     urls = user.urls.map { |u| u["url"] }
